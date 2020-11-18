@@ -40,7 +40,12 @@ namespace Learningcsharp.Migrations
                     b.Property<int>("Strength")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("UsersId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UsersId");
 
                     b.ToTable("Characters");
                 });
@@ -63,6 +68,20 @@ namespace Learningcsharp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Learningcsharp.Models.Character", b =>
+                {
+                    b.HasOne("Learningcsharp.Models.User", "Users")
+                        .WithMany("Characters")
+                        .HasForeignKey("UsersId");
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Learningcsharp.Models.User", b =>
+                {
+                    b.Navigation("Characters");
                 });
 #pragma warning restore 612, 618
         }
