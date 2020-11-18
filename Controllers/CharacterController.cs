@@ -5,11 +5,13 @@ using Learningcsharp.Controllers.Dtos.Characters;
 using Learningcsharp.Controllers.Services.CharacterService;
 using Learningcsharp.Dtos.Characters;
 using Learningcsharp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Learningcsharp.Controllers
 {
 
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class CharacterController : ControllerBase
