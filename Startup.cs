@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Learningcsharp.Controllers.Services.CharacterService;
 using Learningcsharp.Data;
+using Learningcsharp.Services.WeaponService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -49,7 +51,8 @@ namespace Learningcsharp
             });
             services.AddDbContext<DataContext>(option => 
                                 option.UseSqlite(Configuration.GetConnectionString("Sqlite")));
-
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IWeaponService, WeaponService>();
         }
  
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

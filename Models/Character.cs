@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using Learningcsharp.Dtos.Characters;
+
 namespace Learningcsharp.Models
 {
     public class Character
@@ -11,5 +14,8 @@ namespace Learningcsharp.Models
         public RpgClass Class {get; set;} = RpgClass.Knight;
 
         public User Users { get; set; }
+
+        public Weapon weapon { get; set; }
+
     }
 }

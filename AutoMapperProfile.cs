@@ -1,5 +1,6 @@
 using AutoMapper;
 using Learningcsharp.Controllers.Dtos.Characters;
+using Learningcsharp.Dtos.Weapons;
 using Learningcsharp.Models;
 
 namespace Learningcsharp
@@ -10,6 +11,7 @@ namespace Learningcsharp
         {
             CreateMap<Character, GetCharacterDto>();
             CreateMap<AddCharacterDto, Character>();
+            CreateMap<Weapon, GetWeaponDto>();
         }
     }
 }

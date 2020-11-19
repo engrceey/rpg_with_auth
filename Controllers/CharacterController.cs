@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Learningcsharp.Controllers.Dtos.Characters;
 using Learningcsharp.Controllers.Services.CharacterService;
@@ -24,6 +25,7 @@ namespace Learningcsharp.Controllers
 
         }
 
+        // [AllowAnonymous]
         [HttpGet("GetAll")]
         public async Task<IActionResult> Get()
         {
