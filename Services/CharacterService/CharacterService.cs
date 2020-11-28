@@ -29,6 +29,8 @@ namespace Learningcsharp.Controllers.Services.CharacterService
 
         private int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
 
+        private int GetUserRole() => int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Role));
+
         public CharacterService(IMapper mapper, DataContext context, IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
@@ -85,10 +87,20 @@ namespace Learningcsharp.Controllers.Services.CharacterService
         public async Task<ServiceResponse<List<GetCharacterDto>>> GetAllCharacters()
         {
             ServiceResponse<List<GetCharacterDto>> serviceResponse = new ServiceResponse<List<GetCharacterDto>>();
-            // List<Character> dbCharacters = await _context.Characters.ToListAsync();
             List<Character> dbCharacters = await _context.Characters.Where(c => c.Users.Id == GetUserId()).ToListAsync();
             serviceResponse.Data = (dbCharacters.Select(c => _mapper.Map<GetCharacterDto>(c))).ToList();
             return serviceResponse;
+
+            // ServiceResponse<List<GetCharacterDto>> serviceResponse = new ServiceResponse<List<GetCharacterDto>>();
+            // // List<Character> dbCharacters = await _context.Characters.ToListAsync();
+            // List<Character> dbCharacters =
+            // GetUserRole().Equals("Admin") ?
+            // await _context.Characters.ToListAsync() : 
+            // await _context.Characters.Where(c => c.Users.Id == GetUserId()).ToListAsync();
+            // serviceResponse.Data = (dbCharacters.Select(c => _mapper.Map<GetCharacterDto>(c))).ToList();
+            // return serviceResponse;
+
+            
         }
 
         public async Task<ServiceResponse<GetCharacterDto>> GetCharacterById(int id)
